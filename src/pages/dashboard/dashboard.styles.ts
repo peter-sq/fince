@@ -48,7 +48,8 @@ export const Logo = styled.div`
 export const SidebarToggle = styled.button`
   background: none;
   border: none;
-  color: #2c3e50;
+  color: #7000F6;
+  background-color: #F7F0FF;
   cursor: pointer;
   display: block;
   
@@ -219,14 +220,14 @@ export const SidebarMenu = styled.ul`
 `;
 
 export const MenuItem = styled.li`
-  padding: 60px 40px;
+  padding: 60px 80px;
   display: flex;
   align-items: center;
   cursor: pointer;
   transition: all 0.2s ease;
 
   &:hover {
-    background-color:rgb(188, 128, 244);
+    background-color:#FFFFFF1F;
   }
 
   @media (min-width: 768px) {
@@ -289,8 +290,8 @@ export const CaptionText = styled.p`
 `;
 
 export const AddButton = styled.button`
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   background-color: #7000F6;
   color: white;
@@ -557,9 +558,43 @@ transition: all 0.2s ease;
 }
 `;
 
+export const ProfileContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 0 16px;
+  margin-bottom: 8px;
+   color:#FFFFFF;
+`;
+
+export const ProfileContent = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 16px 0;
+`;
 
 
-  
+export const ProfileInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  overflow: hidden;
+  color:#FFFFFF;
+`;
+
+export const ProfileEmail = styled.span`
+  font-size: 12px;
+  color: #FFFFFF;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
+export const BottomLine = styled.div`
+  height: 1px;
+  background-color: #F3F4F61F;
+  width: 100%;
+  border: 1px solid #F3F4F61F;
+`;
 
   export const StatusBadge = styled.span<StatusBadgeProps>`
     padding: 4px 8px;
@@ -625,19 +660,19 @@ transition: all 0.2s ease;
 
   // Edit button styles
   ${props => props.variant === 'edit' && css`
-    background-color: #f0f0f0;  // Light gray background
-    color: #333;               // Black icon
+    background-color: #f0f0f0;  
+    color: #333;               
     &:hover {
-      background-color: #e0e0e0;  // Slightly darker gray on hover
+      background-color: #e0e0e0;  
     }
   `}
 
   // Delete button styles
   ${props => props.variant === 'delete' && css`
-    background-color: #ffebee;  // Light red background
-    color: #f44336;            // Red icon
+    background-color: #ffebee;  
+    color: #f44336;            
     &:hover {
-      background-color: #ffcdd2;  // Slightly darker light red on hover
+      background-color: #ffcdd2;  
     }
   `}
 

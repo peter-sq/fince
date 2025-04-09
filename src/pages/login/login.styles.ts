@@ -103,6 +103,7 @@ export const Title = styled.h1`
   text-align: center;
   font-weight: 600;
   font-family: 'Satoshi', sans-serif;
+  
 `;
 
 export const InputField = styled.div`

@@ -18,29 +18,35 @@ import {
   ErrorMessage,
   SubmitButton
 } from './login.styles';
-import React from 'react';
 
-
+//validate email 
 const validateEmail = (email: string) => {
   const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return re.test(email);
 };
 
+
 export const Login = () => {
+
   const navigate = useNavigate();
+
+  //set states
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   });
+
   const [errors, setErrors] = useState({
     email: '',
     password: ''
   });
+
   const [touched, setTouched] = useState({
     email: false,
     password: false
   });
 
+  //handle form on change
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
@@ -68,6 +74,7 @@ export const Login = () => {
     setErrors(prev => ({ ...prev, [name]: error }));
   };
 
+  //form validation
   const validateForm = () => {
     let isValid = true;
     const newErrors = { ...errors };
@@ -89,6 +96,7 @@ export const Login = () => {
     return isValid;
   };
 
+  //handle form submission
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
@@ -110,11 +118,9 @@ export const Login = () => {
             </PhoneImageWrapper>
           </PhoneContainer>
         </LeftPanel>
-
         <RightPanel>
           <FormContainer>
             <Title>Sign In</Title>
-            
             <form onSubmit={handleSubmit}>
               <InputField>
                 <Label htmlFor="email">Email Address*</Label>

@@ -21,6 +21,11 @@ import {
   MenuIcon,
   MenuText,
   Content,
+  ProfileContainer,
+  ProfileInfo,
+  ProfileEmail,
+  ProfileContent,
+  BottomLine,
   MobileOverlay,
   TitleSection,
   TitleContent,
@@ -38,8 +43,6 @@ import {
   AmountText,
   TableContainer,
   StatusBadge,
-  EditButton,
-  DeleteButton,
   ActionButton
 } from './dashboard.styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -69,8 +72,6 @@ import {faFileText, faReceipt, faMoneyBillTransfer, faSave,  faMoneyBill,
 
 import logo from '../../assets/logo.png'
 
-
-
 interface Post {
   id: number;
   title: string;
@@ -83,6 +84,7 @@ interface User {
   name: string;
   email: string;
   username: string;
+  showBottomLine?: boolean;
 }
 
 const Dashboard = () => {
@@ -117,7 +119,7 @@ const { data: posts, isLoading, error } = useQuery({
 });
 
 
-const { data: users, isLoading: usersLoading, error: usersError } = useQuery({
+const { data: users, isLoading: usersLoading, error: usersError,  } = useQuery({
   queryKey: ['users'], 
   queryFn: async () => {
     const response = await axios.get('https://jsonplaceholder.typicode.com/users');
@@ -128,7 +130,7 @@ const { data: users, isLoading: usersLoading, error: usersError } = useQuery({
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error loading data</div>;
 
-  const getInitials = (name: string) => {
+  const getInitials = (name: string,  showBottomLine = true ) => {
     if (!name) return '';
     const names = name.split(' ');
     return names.map(n => n[0]).join('').toUpperCase();
@@ -149,9 +151,10 @@ const { data: users, isLoading: usersLoading, error: usersError } = useQuery({
 
   return (
     <DashboardContainer>
+       {/* Header Section */}
       <Header>
         <SidebarToggle onClick={toggleSidebar}>
-        {isSidebarOpen ? <FontAwesomeIcon icon={faTimes} size="lg" /> : <FontAwesomeIcon icon={faBars} size="lg" />}
+        {isSidebarOpen ? <FontAwesomeIcon icon={faTimes} /> : <FontAwesomeIcon icon={faBars} />}
         </SidebarToggle>
         <Logo>
           <img src={logo} alt='logo' />
@@ -159,7 +162,7 @@ const { data: users, isLoading: usersLoading, error: usersError } = useQuery({
         <HeaderContent>
           <UserProfile onClick={toggleDropdown}>
             <ProfileAvatar>
-                 {user ? getInitials(user.name) : <FontAwesomeIcon icon={faUser} size="lg" />}
+                 {user ? getInitials(user.name) : <FontAwesomeIcon icon={faUser} />}
             </ProfileAvatar>
             <ProfileName>{user?.name || 'User'}</ProfileName>
             <DropdownIcon isOpen={isDropdownOpen}>
@@ -174,19 +177,24 @@ const { data: users, isLoading: usersLoading, error: usersError } = useQuery({
           </UserProfile>
         </HeaderContent>
       </Header>
-
       <MainLayout>
         <Sidebar isOpen={isSidebarOpen}>
           <SidebarMenu>
             <MenuItem>
               <MenuIcon>
-               
-              <ProfileAvatar>
-                 {user ? getInitials(user.name) : <FontAwesomeIcon icon={faUser} size="lg" />}
-            </ProfileAvatar>
-                </MenuIcon>
-              <p>User</p>
-         
+              <ProfileContainer>
+              <ProfileContent>
+                <ProfileAvatar>
+                  {user ? getInitials(user.name || 'User') : <FontAwesomeIcon icon={faUser} />}
+                </ProfileAvatar>
+                <ProfileInfo>
+                  <ProfileName>{user?.name || 'User Name'}</ProfileName>
+                  <ProfileEmail>{user?.email || 'user@example.com'}</ProfileEmail>
+                </ProfileInfo>
+              </ProfileContent>
+              <BottomLine />
+            </ProfileContainer>
+            </MenuIcon>
             </MenuItem>
             <MenuItem>
               <MenuIcon>
@@ -202,57 +210,54 @@ const { data: users, isLoading: usersLoading, error: usersError } = useQuery({
             </MenuItem>
             <MenuItem>
               <MenuIcon>
-                <FontAwesomeIcon icon={faFileText} size="lg" />
+                <FontAwesomeIcon icon={faFileText} />
                 </MenuIcon>
               <MenuText>Posts</MenuText>
             </MenuItem>
             <MenuItem>
               <MenuIcon>
-              <FontAwesomeIcon icon={faMoneyBill} size="lg" />
+              <FontAwesomeIcon icon={faMoneyBill} />
                 </MenuIcon>
               <MenuText>Transfers</MenuText>
             </MenuItem>
             <MenuItem>
               <MenuIcon>
-              <FontAwesomeIcon icon={faCreditCard} size="lg" />
+              <FontAwesomeIcon icon={faCreditCard} />
                 </MenuIcon>
               <MenuText>Deposits</MenuText>
             </MenuItem>
             <MenuItem>
               <MenuIcon>
-              <FontAwesomeIcon icon={faSave} size="lg" />
+              <FontAwesomeIcon icon={faSave} />
                 </MenuIcon>
               <MenuText>Savings</MenuText>
             </MenuItem>
             <MenuItem>
               <MenuIcon>
-              <FontAwesomeIcon icon={faMoneyBillTransfer} size="lg" />
-                
+              <FontAwesomeIcon icon={faMoneyBillTransfer} />
                 </MenuIcon>
               <MenuText>Bill Payments</MenuText>
             </MenuItem>
             <MenuItem>
               <MenuIcon>
-              <FontAwesomeIcon icon={faReceipt} size="lg" />
+              <FontAwesomeIcon icon={faReceipt} />
                 </MenuIcon>
               <MenuText>Reports</MenuText>
             </MenuItem>
             <MenuItem>
               <MenuIcon>
-              <FontAwesomeIcon icon={faFileAlt} size="lg" />
-              
+              <FontAwesomeIcon icon={faFileAlt} />
                 </MenuIcon>
               <MenuText>Compliance</MenuText>
             </MenuItem>
             <MenuItem>
               <MenuIcon>
-              <FontAwesomeIcon icon={faCog} size="lg" />
+              <FontAwesomeIcon icon={faCog} />
                 </MenuIcon>
               <MenuText>Settings</MenuText>
             </MenuItem>
           </SidebarMenu>
         </Sidebar>
-
         {isSidebarOpen && <MobileOverlay onClick={toggleSidebar} />}
         <Content>
         <TitleSection>
@@ -264,7 +269,6 @@ const { data: users, isLoading: usersLoading, error: usersError } = useQuery({
           <FontAwesomeIcon icon={faPlus} size="xl" /> 
           </AddButton>
         </TitleSection>
-
         {/* Cards Section */}
         <CardsContainer>
           <Card color="#F9F9F9">
@@ -274,14 +278,14 @@ const { data: users, isLoading: usersLoading, error: usersError } = useQuery({
             </AmountText>
             <p className="view-details" style={{ color: '#7000F6', fontFamily: "sans-serif", fontSize:"13px", fontWeight: "400" }}>View Details</p>
           </Card>
-          <Card color="#E5ECF6">
+          <Card color="#F9F9F9">
             <h3>Total Succssful Posts</h3>
             <AmountText>
                89,120 
             </AmountText>
             <p className="view-details" style={{ color: '#008000', fontFamily: "sans-serif", fontSize:"13px", fontWeight: "400" }}>View Details</p>
           </Card>
-          <Card color="#E3F5FF">
+          <Card color="#F9F9F9">
             <h3>Draft Posts</h3>
             <AmountText>
                12,100 <span>+5 % today</span>
@@ -296,17 +300,17 @@ const { data: users, isLoading: usersLoading, error: usersError } = useQuery({
           </SearchInput>
           <FilterSection>
             <FilterButton>
-            <FontAwesomeIcon icon={faFilter} size="lg" /> 
+            <FontAwesomeIcon icon={faFilter} /> 
               <span>Filters</span>
-              <FontAwesomeIcon icon={faChevronDown} size="lg" /> 
+              <FontAwesomeIcon icon={faChevronDown} /> 
             </FilterButton>
             <PaginationContainer>
               <PaginationButton>
-              <FontAwesomeIcon icon={faChevronLeft} size="lg" /> 
+              <FontAwesomeIcon icon={faChevronLeft} /> 
               </PaginationButton>
               <span>1 - 10 of 240</span>
               <PaginationButton>
-              <FontAwesomeIcon icon={faChevronRight} size="lg" /> 
+              <FontAwesomeIcon icon={faChevronRight} /> 
               </PaginationButton>
             </PaginationContainer>
           </FilterSection>
