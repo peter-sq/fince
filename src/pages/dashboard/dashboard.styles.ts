@@ -253,7 +253,7 @@ export const MenuText = styled.span`
   color: #FFFFFFB8;
   font-weight: 500;
   letter-spacing: -3%;
-  font-family: 'Satoshi', sans-serif;;
+  font-family: 'Satoshi', sans-serif;
   line-height: 24px
 
   @media (min-width: 768px) {

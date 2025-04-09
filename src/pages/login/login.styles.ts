@@ -96,16 +96,22 @@ export const FormContainer = styled.div`
 `;
 
 export const Title = styled.h1`
-  font-size: 2.5rem;
+  font-size: 40px;
   margin-bottom: 2.5rem;
-  color: #2c3e50;
+  color: #0A090B;
+  margin-right: 22rem;
   text-align: center;
   font-weight: 600;
+  font-family: 'Satoshi', sans-serif;
 `;
 
 export const InputField = styled.div`
   margin-bottom: 2rem;
-  width: 100%;
+  width: 312px;
+  font-family:sans-serif;
+  font-weight: 500;
+  color: #09090B;
+  line-height: 24px;
 `;
 
 export const Label = styled.label`
@@ -139,20 +145,21 @@ export const ErrorMessage = styled.span`
 `;
 
 export const SubmitButton = styled.button`
-  width: 100%;
+  width: 335px;
   padding: 16px;
-  background-color: #3498db;
+  background-color: #7000F6;
   color: white;
   border: none;
   border-radius: 10px;
-  font-size: 1.1rem;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 500;
+  font-family: sans-serif;
   cursor: pointer;
   transition: all 0.3s ease;
   margin-top: 1rem;
 
   &:hover {
-    background-color: #2980b9;
+    background-color: #7000F6;
     transform: translateY(-2px);
   }
 
@@ -161,19 +168,3 @@ export const SubmitButton = styled.button`
   }
 `;
 
-export const ForgotPassword = styled.div`
-  text-align: center;
-  margin-top: 2rem;
-  
-  a {
-    color: #7f8c8d;
-    text-decoration: none;
-    font-size: 0.95rem;
-    transition: all 0.3s ease;
-    
-    &:hover {
-      color: #3498db;
-      text-decoration: underline;
-    }
-  }
-`;

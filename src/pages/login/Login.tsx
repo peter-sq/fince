@@ -16,8 +16,7 @@ import {
   Label,
   Input,
   ErrorMessage,
-  SubmitButton,
-  ForgotPassword
+  SubmitButton
 } from './login.styles';
 import React from 'react';
 
@@ -118,12 +117,12 @@ export const Login = () => {
             
             <form onSubmit={handleSubmit}>
               <InputField>
-                <Label htmlFor="email">Email Address</Label>
+                <Label htmlFor="email">Email Address*</Label>
                 <Input
                   id="email"
                   name="email"
                   type="email"
-                  placeholder="Enter your email"
+                  placeholder="Enter Email Address"
                   value={formData.email}
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -132,12 +131,12 @@ export const Login = () => {
               </InputField>
               
               <InputField>
-                <Label htmlFor="password">Password</Label>
+                <Label htmlFor="password">Password* </Label>
                 <Input
                   id="password"
                   name="password"
                   type="password"
-                  placeholder="Enter your password"
+                  placeholder="Enter Password"
                   value={formData.password}
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -148,10 +147,6 @@ export const Login = () => {
               <SubmitButton type="submit">
                 Sign In
               </SubmitButton>
-
-              <ForgotPassword>
-                <a href="/forgot-password">Forgot your password?</a>
-              </ForgotPassword>
             </form>
           </FormContainer>
         </RightPanel>
