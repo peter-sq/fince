@@ -114,7 +114,7 @@ const { data: posts, isLoading, error } = useQuery({
 });
 
 
-const { data: users, isLoading: usersLoading, error: usersError,  } = useQuery({
+const { data: users } = useQuery({
   queryKey: ['users'], 
   queryFn: async () => {
     const response = await axios.get('https://jsonplaceholder.typicode.com/users');
