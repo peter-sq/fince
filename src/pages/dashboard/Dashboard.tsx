@@ -1,4 +1,4 @@
-import{ ReactElement, useState, useEffect } from 'react';
+import{ useState, useEffect } from 'react';
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 
@@ -47,7 +47,6 @@ import {
 } from './dashboard.styles';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faFileText, faReceipt, faMoneyBillTransfer, faSave,  faMoneyBill,
-  faSearch,
   faFilter,
   faChevronLeft,
   faChevronRight,
@@ -57,11 +56,7 @@ import {faFileText, faReceipt, faMoneyBillTransfer, faSave,  faMoneyBill,
   faHome,
   faUsers,
   faFileAlt,
-  faMoneyBillWave,
   faCreditCard,
-  faChartPie,
-  faFile,
-  faShieldAlt,
   faCog,
   faChevronDown,
   faBars,
